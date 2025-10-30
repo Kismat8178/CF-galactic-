@@ -7,57 +7,32 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700;900&display=swap');
+        
+        :root {
+            --color-primary: #3b82f6; /* Blue-500 */
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-gray-900: #111827;
+            --color-gray-800: #1f2937;
+            --color-gray-700: #374151;
+            --color-gray-400: #9ca3af;
+            --color-gray-500: #6b7280;
+        }
 
         body {
             font-family: 'Exo 2', sans-serif;
-            background-color: #000000;
-            color: #ffffff;
+            background-color: var(--color-black);
+            color: var(--color-white);
             scroll-behavior: smooth;
             overflow-x: hidden;
         }
 
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #000;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.75s ease, visibility 0.75s ease;
-        }
-
-        .loader-dot {
-            width: 1.5rem;
-            height: 1.5rem;
-            margin: 0 0.5rem;
-            background-color: #3b82f6; /* Blue */
-            border-radius: 50%;
-            animation: bounce 1.4s infinite ease-in-out both;
-        }
-
-        .loader-dot:nth-child(1) { animation-delay: -0.32s; }
-        .loader-dot:nth-child(2) { animation-delay: -0.16s; }
-
-        @keyframes bounce {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1.0); }
-        }
-
-        #loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .insta-button {
+        .glow-button {
             position: relative;
             padding: 0.75rem 1.5rem;
             font-weight: 700;
             color: white;
-            background-image: linear-gradient(to right, #4f46e5, #3b82f6);
+            background-image: linear-gradient(to right, #4f46e5, var(--color-primary));
             border: none;
             border-radius: 0.5rem;
             cursor: pointer;
@@ -70,11 +45,11 @@
             justify-content: center;
         }
         
-        .insta-button.instagram-gradient {
+        .glow-button.instagram-gradient {
              background-image: linear-gradient(to right, #f97316, #d62976, #962fbf, #4f5bd5);
         }
 
-        .insta-button::before {
+        .glow-button::before {
             content: '';
             position: absolute;
             top: 0;
@@ -86,22 +61,18 @@
             z-index: -1;
         }
 
-        .insta-button:hover {
+        .glow-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 25px #3b82f6, 0 0 50px #4f46e5;
+            box-shadow: 0 0 25px var(--color-primary), 0 0 50px #4f46e5;
         }
         
-        .insta-button.instagram-gradient:hover {
+        .glow-button.instagram-gradient:hover {
             box-shadow: 0 0 25px #d62976, 0 0 50px #f97316;
-        }
-
-        .insta-button:hover::before {
-            left: 100%;
         }
 
         .hero {
             height: 100vh;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1508098682722-e9d7c3a3b511?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjAzNTV8MHwxfGFsbHx8fHx8fHx8fDE3MzEwMDQ5NDl8&ixlib=rb-4.0.3&q=80&w=1080');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1508098682722-e9d7c3a3b511?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjAzNTV8MHwxfGFsbHx8fHx8fHx8fDE3MzEwMDQ5NDl8&ixlibrb-4.0.3&q=80&w=1080');
             background-size: cover;
             background-position: center;
         }
@@ -110,27 +81,14 @@
             animation: fadeInDown 1s ease-out 0.5s;
             animation-fill-mode: backwards;
         }
-
-        .hero-title-anim {
-            animation: fadeInUp 1s ease-out 1s;
-            animation-fill-mode: backwards;
-        }
-        
-        .hero-subtitle-anim {
-            animation: fadeInUp 1s ease-out 1.2s;
-            animation-fill-mode: backwards;
-        }
-
-        .hero-button-anim {
-            animation: fadeInUp 1s ease-out 1.4s;
-            animation-fill-mode: backwards;
-        }
+        .hero-title-anim { animation: fadeInUp 1s ease-out 1s; animation-fill-mode: backwards; }
+        .hero-subtitle-anim { animation: fadeInUp 1s ease-out 1.2s; animation-fill-mode: backwards; }
+        .hero-button-anim { animation: fadeInUp 1s ease-out 1.4s; animation-fill-mode: backwards; }
 
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -141,15 +99,14 @@
             transform: translateY(40px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-
         .scroll-animate.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
         .formation-pitch {
-            background-color: #052e16; /* Darker green */
-            border: 4px solid #fff;
+            background-color: #052e16;
+            border: 4px solid var(--color-white);
             border-radius: 0.5rem;
             position: relative;
             aspect-ratio: 7 / 10;
@@ -170,14 +127,19 @@
             flex-direction: column;
             align-items: center;
             transform: translate(-50%, -50%);
-            width: 80px; /* Container width */
+            width: 80px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .player-container:hover {
+            transform: translate(-50%, -50%) scale(1.1);
         }
 
         .player-dot {
             width: 2.5rem;
             height: 2.5rem;
-            background-color: #3b82f6; /* Blue */
-            color: #ffffff;
+            background-color: var(--color-primary);
+            color: var(--color-white);
             font-weight: 700;
             border-radius: 50%;
             display: flex;
@@ -186,30 +148,33 @@
             font-size: 0.9rem;
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
             animation: pulse 2s infinite ease-in-out;
+            pointer-events: none;
         }
-        
         .player-name {
-            color: #ffffff;
+            color: var(--color-white);
             font-weight: 700;
-            font-size: 0.75rem; /* Small text for names */
+            font-size: 0.75rem;
             text-align: center;
             margin-top: 0.25rem;
             line-height: 1.1;
+            pointer-events: none;
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(59, 130, 246, 0.7); }
-            50% { transform: scale(1.1); box-shadow: 0 0 15px #3b82f6; }
+            50% { transform: scale(1.1); box-shadow: 0 0 15px var(--color-primary); }
         }
 
-        /* 3-2-1 Formation */
+        /* 3-2-1-2 Formation */
         .gk { top: 7%; left: 50%; }
         .cb-l { top: 25%; left: 20%; animation-delay: 0.2s; }
         .cb-c { top: 25%; left: 50%; animation-delay: 0.1s; }
         .cb-r { top: 25%; left: 80%; animation-delay: 0.2s; }
-        .cm-l { top: 50%; left: 30%; animation-delay: 0.3s; }
-        .cm-r { top: 50%; left: 70%; animation-delay: 0.3s; }
-        .st { top: 75%; left: 50%; animation-delay: 0.4s; }
+        .cm-l { top: 45%; left: 30%; animation-delay: 0.3s; }
+        .cm-r { top: 45%; left: 70%; animation-delay: 0.3s; }
+        .cam { top: 62%; left: 50%; animation-delay: 0.4s; }
+        .st-l { top: 80%; left: 35%; animation-delay: 0.5s; }
+        .st-r { top: 80%; left: 65%; animation-delay: 0.5s; }
         
         .team-logo {
             width: 60px;
@@ -221,31 +186,146 @@
             font-weight: 900;
             font-size: 1.5rem;
         }
+        .logo-galactic { background-color: var(--color-primary); color: var(--color-white); box-shadow: 0 0 15px var(--color-primary); }
+        .logo-sulav { background-color: #e0e0e0; color: var(--color-black); }
         
-        .logo-galactic {
-            background-color: #3b82f6;
-            color: #fff;
-            box-shadow: 0 0 15px #3b82f6;
+        .win-rate-bar {
+            width: 100%;
+            height: 20px;
+            background-color: var(--color-gray-700);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
         }
-        
-        .logo-sulav {
+        .win-rate-gfc {
+            width: 43%;
+            background-color: var(--color-primary);
+            animation: slideIn 1.5s ease-out;
+        }
+        .win-rate-sfc {
+            width: 57%;
             background-color: #e0e0e0;
-            color: #000;
+            animation: slideIn 1.5s ease-out;
         }
+        @keyframes slideIn {
+            from { width: 0; }
+        }
+
+        /* Player Modal */
+        #player-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1001;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #player-modal.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: var(--color-gray-900);
+            border: 2px solid var(--color-primary);
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 400px;
+            padding: 1.5rem;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        #player-modal.visible .modal-content {
+            transform: scale(1);
+        }
+        
+        .stat-bar {
+            width: 100%;
+            height: 1.25rem;
+            background-color: var(--color-gray-700);
+            border-radius: 0.25rem;
+            overflow: hidden;
+        }
+        .stat-bar-inner {
+            height: 100%;
+            background-color: var(--color-primary);
+            color: var(--color-black);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-align: right;
+            padding-right: 0.25rem;
+            transition: width 1s ease-out;
+            white-space: nowrap;
+        }
+
+        /* New Moment Gallery Styles */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .moment-card {
+            flex-shrink: 0;
+            width: 300px;
+            height: 400px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .moment-card:hover {
+            transform: scale(1.03);
+        }
+        .moment-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .moment-card:hover img {
+            transform: scale(1.1);
+        }
+        .moment-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        .moment-card:hover .moment-overlay {
+            transform: translateY(0);
+        }
+        .moment-overlay h5 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
     </style>
 </head>
 <body class="overflow-x-hidden">
 
-    <div id="loader">
-        <div class="loader-dot"></div>
-        <div class="loader-dot"></div>
-        <div class="loader-dot"></div>
-    </div>
-
     <header class="fixed top-0 left-0 w-full bg-black/80 backdrop-blur-sm z-50 header-anim border-b border-gray-700/50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-3xl font-black text-white tracking-wider">GALACTIC<span class="text-blue-500">CF</span></h1>
-            <a href="#follow" class="insta-button hidden md:block">Follow Us</a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#match" class="text-white font-medium hover:text-blue-400 transition-colors">Match</a>
+                <a href="#squad" class="text-white font-medium hover:text-blue-400 transition-colors">Squad</a>
+                <a href="#moments" class="text-white font-medium hover:text-blue-400 transition-colors">Moments</a>
+                <a href="#follow" class="glow-button">Follow Us</a>
+            </div>
         </nav>
     </header>
 
@@ -257,7 +337,7 @@
             <p class="text-xl md:text-3xl text-gray-300 mt-4 max-w-2xl hero-subtitle-anim">
                 We are the future. Born from passion.
             </p>
-            <a href="#match" class="insta-button mt-10 text-lg hero-button-anim">
+            <a href="#match" class="glow-button mt-10 text-lg hero-button-anim">
                 Upcoming Match
             </a>
         </section>
@@ -285,58 +365,141 @@
                         <p class="text-2xl text-white font-bold">Saturday, 10:00 AM</p>
                         <p class="text-lg text-gray-400 mt-1">Get ready for battle.</p>
                     </div>
+
+                    <div class="mt-10">
+                        <p class="text-lg font-bold mb-3">Win Probability</p>
+                        <div class="win-rate-bar">
+                            <div class="win-rate-gfc" title="Galactic CF: 43%"></div>
+                            <div class="win-rate-sfc" title="Sulav FC: 57%"></div>
+                        </div>
+                        <div class="flex justify-between text-sm mt-2">
+                            <span class="text-blue-400 font-bold">GCF: 43%</span>
+                            <span class="text-gray-300 font-bold">SFC: 57%</span>
+                        </div>
+                    </div>
+                    
+                    <button id="see-squad-btn" class="glow-button mt-10 text-lg">
+                        See The Squad
+                    </button>
                 </div>
             </div>
         </section>
 
-        <section class="py-20 md:py-32">
+        <section id="squad" class="py-20 md:py-32">
             <div class="container mx-auto px-6 text-center">
                 <h3 class="text-4xl md:text-5xl font-bold mb-12 scroll-animate">Our <span class="text-blue-500">Squad</span></h3>
                 
+                <h4 class="text-2xl font-bold text-gray-300 mb-6 scroll-animate" style="transition-delay: 0.1s;">Starting IX (3-2-1-2)</h4>
                 <div class="max-w-md mx-auto scroll-animate" style="transition-delay: 0.2s;">
                     <div class="formation-pitch">
                         <!-- GK -->
-                        <div class="player-container gk">
+                        <div class="player-container gk" data-player="ayush-t">
                             <div class="player-dot">GK</div>
                             <div class="player-name">Ayush T.</div>
                         </div>
                         
                         <!-- Defenders -->
-                        <div class="player-container cb-l">
+                        <div class="player-container cb-l" data-player="arbin">
                             <div class="player-dot">CB</div>
-                            <div class="player-name">Alzon P.</div>
+                            <div class="player-name">Arbin</div>
                         </div>
-                        <div class="player-container cb-c">
-                            <div class="player-dot">CB</div>
-                            <div class="player-name">Darshan G.</div>
-                        </div>
-                        <div class="player-container cb-r">
+                        <div class="player-container cb-c" data-player="apil-g">
                             <div class="player-dot">CB</div>
                             <div class="player-name">Apil G.</div>
                         </div>
+                        <div class="player-container cb-r" data-player="shiddhant-p">
+                            <div class="player-dot">CB</div>
+                            <div class="player-name">Shiddhant P.</div>
+                        </div>
                         
                         <!-- Midfielders -->
-                        <div class="player-container cm-l">
+                        <div class="player-container cm-l" data-player="karan-d">
+                            <div class="player-dot">CM</div>
+                            <div class="player-name">Karan D.</div>
+                        </div>
+                        <div class="player-container cm-r" data-player="arun-c">
                             <div class="player-dot">CM</div>
                             <div class="player-name">Arun C.</div>
                         </div>
-                        <div class="player-container cm-r">
-                            <div class="player-dot">CM</div>
-                            <div class="player-name">Ayush R.</div>
+                        <div class="player-container cam" data-player="krish-t">
+                            <div class="player-dot">CAM</div>
+                            <div class="player-name">Krish T.</div>
                         </div>
                         
-                        <!-- Striker -->
-                        <div class="player-container st">
+                        <!-- Strikers -->
+                        <div class="player-container st-l" data-player="ajay-b">
                             <div class="player-dot">ST</div>
                             <div class="player-name">Ajay B.</div>
                         </div>
+                        <div class="player-container st-r" data-player="ayush-r">
+                            <div class="player-dot">ST</div>
+                            <div class="player-name">Ayush R.</div>
+                        </div>
                     </div>
-                    <p class="text-center text-gray-300 font-bold text-xl mt-6">Formation: 3-2-1</p>
+                </div>
+
+                <h4 class="text-2xl font-bold text-gray-300 mt-16 mb-6 scroll-animate" style="transition-delay: 0.3s;">Substitutes</h4>
+                <div class="max-w-md mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 scroll-animate" style="transition-delay: 0.4s;">
+                    
+                    <div class="bg-gray-800 p-4 rounded-lg flex items-center space-x-4 cursor-pointer hover:bg-gray-700 transition-colors" data-player="diwash-m">
+                        <div class="w-10 h-10 rounded-full bg-blue-500 flex-shrink-0 flex items-center justify-center font-bold">CM</div>
+                        <div class="text-left">
+                            <p class="font-bold">Diwash A. Magar</p>
+                            <p class="text-sm text-gray-400">Midfielder</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-800 p-4 rounded-lg flex items-center space-x-4 cursor-pointer hover:bg-gray-700 transition-colors" data-player="darshan-g">
+                        <div class="w-10 h-10 rounded-full bg-yellow-500 text-black flex-shrink-0 flex items-center justify-center font-bold">GK</div>
+                        <div class="text-left">
+                            <p class="font-bold">Darshan Ghising</p>
+                            <p class="text-sm text-gray-400">Goalkeeper</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-800 p-4 rounded-lg flex items-center space-x-4 cursor-pointer hover:bg-gray-700 transition-colors" data-player="alzon-p">
+                        <div class="w-10 h-10 rounded-full bg-blue-500 flex-shrink-0 flex items-center justify-center font-bold">CM</div>
+                        <div class="text-left">
+                            <p class="font-bold">Alzon Parajuli</p>
+                            <p class="text-sm text-gray-400">Midfielder</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <section id="follow" class="py-20 md:py-32 bg-gray-900">
+        <!-- New Moments Section -->
+        <section id="moments" class="py-20 md:py-32 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <h3 class="text-4xl md:text-5xl font-bold mb-12 text-center scroll-animate">Explore Our <span class="text-blue-500">Moments</span></h3>
+                <div class="flex space-x-6 overflow-x-auto pb-4 hide-scrollbar scroll-animate" style="transition-delay: 0.2s;">
+                    
+                    <div class="moment-card">
+                        <img src="https://images.unsplash.com/photo-1551956012-b270038b365b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjAzNTV8MHwxfGFsbHx8fHx8fHx8fDE3MzEwMTQxODZ8&ixlib=rb-4.0.3&q=80&w=400" alt="First Goal">
+                        <div class="moment-overlay"><h5>The First Goal</h5></div>
+                    </div>
+                    
+                    <div class="moment-card">
+                        <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjAzNTV8MHwxfGFsbHx8fHx8fHx8fDE3MzEwMTQyMjB8&ixlib=rb-4.0.3&q=80&w=400" alt="Team Huddle">
+                        <div class="moment-overlay"><h5>Team Spirit</h5></div>
+                    </div>
+                    
+                    <div class="moment-card">
+                        <img src="https://images.unsplash.com/photo-1606968134732-40c4f3317e8d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjAzNTV8MHwxfGFsbHx8fHx8fHx8fDE3MzEwMTQyNTF8&ixlib=rb-4.0.3&q=80&w=400" alt="Training Day">
+                        <div class="moment-overlay"><h5>Training Day</h5></div>
+                    </div>
+                    
+                    <div class="moment-card">
+                        <img src="https://images.unsplash.com/photo-1544883130-9d0f4b616b6c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjAzNTV8MHwxfGFsbHx8fHx8fHx8fDE3MzEwMTQyNzl8&ixlib=rb-4.0.3&q=80&w=400" alt="Fans">
+                        <div class="moment-overlay"><h5>Our Future Fans</h5></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="follow" class="py-20 md:py-32 bg-black">
             <div class="container mx-auto px-6 text-center">
                 <div class="max-w-lg mx-auto scroll-animate">
                     <h3 class="text-4xl md:text-5xl font-bold mb-6">Join The <span class="text-blue-500">Movement</span></h3>
@@ -344,7 +507,7 @@
                         This is just the beginning. Follow our journey from the ground up.
                     </p>
                     <a href="https://www.instagram.com/galactic_cf_" target="_blank"
-                       class="insta-button instagram-gradient text-xl">
+                       class="glow-button instagram-gradient text-xl">
                         <svg class="w-7 h-7 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 16a4 4 0 100-8 4 4 0 000 8z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 16V8a5 5 0 015-5h8a5 5 0 015 5v8a5 5 0 01-5 5H8a5 5 0 01-5-5z"></path></svg>
                         Follow @galactic_cf_
                     </a>
@@ -359,22 +522,126 @@
         </div>
     </footer>
 
+    <!-- Player Stats Modal -->
+    <div id="player-modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="modal-player-name" class="text-3xl font-bold text-blue-400">Player Name</h3>
+                <button id="modal-close-btn" class="text-3xl text-gray-400 hover:text-white">&times;</button>
+            </div>
+            
+            <div class="flex items-center space-x-6 mb-6">
+                <img id="modal-player-img" src="https://placehold.co/100x100/3b82f6/white?text=GCF" alt="Player" class="w-24 h-24 rounded-full border-4 border-blue-500">
+                <div>
+                    <p id="modal-player-position" class="text-xl font-bold">Position</p>
+                    <!-- Age <p> tag removed -->
+                </div>
+            </div>
+
+            <div id="modal-player-stats" class="space-y-3">
+                <!-- Stats will be injected here by JS -->
+            </div>
+        </div>
+    </div>
+
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            const content = document.getElementById('content');
+        // Player database with stats under 55
+        const players = {
+            'ayush-t': { name: 'Ayush Thakuri', pos: 'Goalkeeper', stats: { type: 'gk', div: 52, han: 50, ref: 55 } },
+            'arbin': { name: 'Arbin', pos: 'Centre Back', stats: { type: 'out', pac: 48, sho: 30, pas: 38, dri: 35, def: 52, phy: 53 } },
+            'apil-g': { name: 'Apil Ryu Gurung', pos: 'Centre Back', stats: { type: 'out', pac: 50, sho: 32, pas: 42, dri: 40, def: 55, phy: 54 } },
+            'shiddhant-p': { name: 'Shiddhant P.', pos: 'Centre Back', stats: { type: 'out', pac: 46, sho: 28, pas: 35, dri: 34, def: 54, phy: 55 } },
+            'karan-d': { name: 'Karan D.', pos: 'Midfielder (CM)', stats: { type: 'out', pac: 51, sho: 45, pas: 54, dri: 50, def: 44, phy: 48 } },
+            'arun-c': { name: 'Arun Chettri', pos: 'Midfielder (CM)', stats: { type: 'out', pac: 52, sho: 47, pas: 55, dri: 53, def: 46, phy: 49 } },
+            'krish-t': { name: 'Krish T.', pos: 'Midfielder (CAM)', stats: { type: 'out', pac: 55, sho: 51, pas: 55, dri: 55, def: 38, phy: 45 } },
+            'ajay-b': { name: 'Ajay Bhandari', pos: 'Striker (ST)', stats: { type: 'out', pac: 55, sho: 54, pas: 48, dri: 55, def: 25, phy: 50 } },
+            'ayush-r': { name: 'Ayush Ranabhat', pos: 'Striker (ST)', stats: { type: 'out', pac: 54, sho: 53, pas: 49, dri: 55, def: 28, phy: 48 } },
+            'diwash-m': { name: 'Diwash Ale Magar', pos: 'Midfielder (CM)', stats: { type: 'out', pac: 50, sho: 46, pas: 53, dri: 52, def: 45, phy: 49 } },
+            'darshan-g': { name: 'Darshan Ghising', pos: 'Goalkeeper', stats: { type: 'gk', div: 51, han: 48, ref: 54, phy: 40 } }, // Low physical
+            'alzon-p': { name: 'Alzon Parajuli', pos: 'Midfielder (CM)', stats: { type: 'out', pac: 48, sho: 40, pas: 50, dri: 47, def: 49, phy: 51 } }
+        };
+
+        // Modal elements
+        const modal = document.getElementById('player-modal');
+        const modalName = document.getElementById('modal-player-name');
+        const modalImg = document.getElementById('modal-player-img');
+        const modalPos = document.getElementById('modal-player-position');
+        const modalStats = document.getElementById('modal-player-stats');
+        const closeModalBtn = document.getElementById('modal-close-btn');
+
+        // Function to create a stat bar
+        function createStatBar(label, value) {
+            const statRow = document.createElement('div');
+            const innerBar = document.createElement('div');
+            innerBar.className = 'stat-bar-inner';
+            innerBar.style.width = '0%'; // Start at 0 for animation
+            innerBar.textContent = `${label}: ${value}`;
             
-            setTimeout(() => {
-                loader.classList.add('hidden');
-                content.style.opacity = '1';
-                content.style.transition = 'opacity 1s ease';
-            }, 500);
+            // Animate the bar width
+            setTimeout(() => { innerBar.style.width = `${value}%`; }, 100);
+
+            const outerBar = document.createElement('div');
+            outerBar.className = 'stat-bar';
+            outerBar.appendChild(innerBar);
+            
+            return outerBar;
+        }
+
+        // Function to open modal
+        function openPlayerModal(playerId) {
+            const player = players[playerId];
+            if (!player) return;
+
+            modalName.textContent = player.name;
+            modalPos.textContent = player.pos;
+            modalImg.src = `https://placehold.co/100x100/${player.stats.type === 'gk' ? 'f59e0b' : '3b82f6'}/white?text=${player.name.split(" ").map(n => n[0]).join("")}`;
+            modalStats.innerHTML = ''; // Clear old stats
+
+            if (player.stats.type === 'gk') {
+                modalStats.appendChild(createStatBar('DIV', player.stats.div));
+                modalStats.appendChild(createStatBar('HAN', player.stats.han)); // <-- BUG FIX (was createStatSBar)
+                modalStats.appendChild(createStatBar('REF', player.stats.ref));
+                if (player.stats.phy) {
+                    modalStats.appendChild(createStatBar('PHY', player.stats.phy));
+                }
+            } else {
+                modalStats.appendChild(createStatBar('PAC', player.stats.pac));
+                modalStats.appendChild(createStatBar('SHO', player.stats.sho));
+                modalStats.appendChild(createStatBar('PAS', player.stats.pas));
+                modalStats.appendChild(createStatBar('DRI', player.stats.dri));
+                modalStats.appendChild(createStatBar('DEF', player.stats.def));
+                modalStats.appendChild(createStatBar('PHY', player.stats.phy));
+            }
+
+            modal.classList.add('visible');
+        }
+
+        // Add click listeners to all player elements
+        document.querySelectorAll('[data-player]').forEach(el => {
+            el.addEventListener('click', () => {
+                openPlayerModal(el.dataset.player);
+            });
         });
 
-        const animatedElements = document.querySelectorAll('.scroll-animate');
+        // Close modal logic
+        closeModalBtn.addEventListener('click', () => modal.classList.remove('visible'));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('visible');
+            }
+        });
 
+        // Page load fade-in
+        window.addEventListener('load', () => {
+            const content = document.getElementById('content');
+            content.style.opacity = '1';
+            content.style.transition = 'opacity 1s ease';
+        });
+
+        // Scroll animation observer
+        const animatedElements = document.querySelectorAll('.scroll-animate');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -382,13 +649,15 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.1
+        }, { threshold: 0.1 });
+        animatedElements.forEach(el => observer.observe(el));
+
+        // "See Squad" button scroll
+        document.getElementById('see-squad-btn').addEventListener('click', () => {
+            document.getElementById('squad').scrollIntoView({ behavior: 'smooth' });
         });
 
-        animatedElements.forEach(el => {
-            observer.observe(el);
-        });
     </script>
 </body>
 </html>
+
